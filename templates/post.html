@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block heading %} {{ super() }} {% endblock %}
+{% block body %}
+  {% if session.username %}
+  	<ul class=entries>
+      {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  		<table style="height: 448px; width: 100%;" border="1">
+		<tbody>
+		<tr>
+  		<td style="width: 40%;">
+        {% for p in thepost %}
+        <b>{{ p.title }}</b>- by:<a href="/{{ p.by }}">{{ p.by }}</a>
+        <br>
+        <br>
+        {{ p.content }}
+
+        {% endfor %}
+  		</td>
+      <td style="width: 35%;">
+      <br><h2>Comments</h2>
+        <br>
+        {% if comments %}
+          {% for c in comments %}
+            <li>{{ c.content }} - by: <a href="/{{ c.by }}">{{ c.by }}</a>
+              <br>
+          {% endfor %}
+        {% else %}
+            <br>
+            No comments yet. Be the first?
+          
+        {% endif %}
+      </td>
+  		<td style="width: 35%;">
+  		<h2>leave a comment?</h2>
+      <br>
+    	<form action="{{ url_for('add_comment', postid=postid) }}" method=post>
+      	<dl>
+        <dd><input type=text size=30 name=comment>
+        <dd><input type=submit value=comment>
+      </dl>
+    </form>
+  		</td>
+  	</ul>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<table style="height: 448px;" width="652" border="1">
+<tbody>
+<tr>
+<td style="width: 325.5px;"><h2>Edit Information</h2><form action="{{ url_for('edit_info') }}" method=POST>
+    <dl>
+      <dt>Full Name:
+      <dd><input type=text name=fname value="{{ info[0] }}">
+      <dt>what are you:
+      <dd><input type=text name=what value="{{ info[1] }}">
+      <dt>where are you from:
+      <dd><input type=text name=where value="{{ info[2] }}">
+      <dt>Date of Birth
+      <dd><input type=text name=dob value="{{ info[3] }}">
+      <dt>About you:
+      <dd><textarea name=about rows=3 cols=10>{{ info[4] }}</textarea>
+      <dt>
+      <dd><input type=submit value=save>
+    </dl>
+  </form></td>
+</tr>
+</tbody>
+</table>
+{% endblock %}

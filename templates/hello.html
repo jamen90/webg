@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% if session.username %}
+	<meta http-equiv="refresh" content="1;{{ url_for('session_chk') }}" />
+{% endif %}
+{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<table style="height: 448px;" width="652" border="1">
+<tbody>
+<tr>
+<td style="width: 325.5px;"><h2>New Account</h2><form action="{{ url_for('sign_up') }}" method=POST>
+    <dl>
+      <dt>Username*:
+      <dd><input type=text name=username>
+      <dt>Password*:
+      <dd><input type=password name=password>
+      <dt>Full Name:
+      <dd><input type=text name=fname placeholder="My full Name..">
+      <dt>what are you:
+      <dd><input type=text name=what placeholder="I am a..">
+      <dt>where are you from:
+      <dd><input type=text name=where placeholder="I am from ..">
+      <dt>Date of Birth
+      <dd><input type=text name=dob placeholder="now i born">
+      <dt>About you:
+      <dd><textarea name=about placeholder="about me.." rows=3 cols=10></textarea>
+      <dt>
+      <dt>The fields with * are required.
+      <dd><input type=submit value=Sign-up>
+    </dl>
+  </form></td>
+<td style="width: 325.5px;"><h2>Login</h2><form action="{{ url_for('login') }}" method=post>
+    <dl>
+      <dt>Username:
+      <dd><input type=text name=uname>
+      <dt>Password:
+      <dd><input type=password name=pword>
+      <dd><input type=submit value=Login>
+    </dl>
+  </form>
+</td>
+</tr>
+</tbody>
+</table>
+{% endblock %}

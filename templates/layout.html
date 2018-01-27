@@ -1,0 +1,25 @@
+<!doctype html>
+<title>Web-G</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style9000.css') }}">
+<div class=page>
+  {% block heading %}
+  <h1><a href="/"> Web-G</a></h1>
+  <br>
+  <br>
+  {% endblock %}
+  <div class=metanav>
+  {% if not session.username %}
+    <a href="{{ url_for('re') }}">*This is a working on project of Flask,Python and PyMongoDB*</a>
+  {% else %}
+    <b><a href="{{ url_for('logout') }}">log out</a></b>
+    <b>ـــــــــــــــــــــــــــــــــــــــــــــ</b>
+    <b>logged in as<a href="/{{ session.username }}"> {{ session.username }}</a></b>
+  {% endif %}
+  </div>
+  <br>
+  <br>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>

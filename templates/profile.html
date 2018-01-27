@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block heading %} {{ super() }} {% endblock %}
+{% block body %}
+  {% if session.username %}
+  	<ul class=entries>
+  		<table style="height: 448px; width: 100%;" border="1">
+		<tbody>
+		<tr>
+		<td style="width: 30%;">
+        <li><h2>Information:</h2>{% if edit %}<a href="{{ url_for('edit_info') }}">{{ edit }}</a>{% endif %}
+    		<li><b>{{ info[0] }}</b>
+        <li>is a {{ info[1] }}
+        <li>from {{ info[2] }}
+        <li>born in {{ info[3] }}
+        <li>about: {{ info[4] }}
+  		</td>
+  		<td style="width: 40%;">
+  		{% if edit %}<h2>Your Board</h2>{% else %}<h2>{{ info[0] }}'s Board</h2>{% endif %}
+      <br>
+      {% if posts %}
+        {% for p in posts %}
+          <li><b>{{ p.title }}</b><br>
+          <br>
+          <li>{{ p.content }}<br>
+            {% if p._id in comments_num %}
+                <a href="{{ url_for('post_sh', postid=p._id) }}">show {{ comments_num[p._id] }} comments</a><br>
+            {% else %}
+                <a href="{{ url_for('post_sh', postid=p._id) }}">no comments-be the first</a><br>
+            {% endif %}
+          ***<br>
+
+        {% endfor %}
+      {% else %}
+        No posts yet.
+      {% endif %}
+
+  		</td>
+  		<td style="width: 35%;">
+  		<h2>To send a message</h2>
+  		</td>
+  	</ul>
+    {% endif %}
+
+{% endblock %}

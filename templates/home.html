@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block heading %} {{ super() }} {% endblock %}
+{% block body %}
+  {% if session.username %}
+  	<ul class=entries>
+      {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  		<table style="height: 448px; width: 100%;" border="1">
+		<tbody>
+		<tr>
+		<td style="width: 25%;">
+			<h2>The Users:</h2>
+			<br> 
+  		{% for user in users %}
+    		<li><h2><a href="/{{ user }}">{{ user }}</a></h2>
+ 		{% else %}
+    		<li><em>Unbelievable.  No Users here so far</em>
+  		{% endfor %}
+  		</td>
+  		<td style="width: 40%;">
+  		<h2>Posts' Board</h2>
+  		<br>
+  		{% for t in title %}
+  			<li><a href="{{ url_for('post_sh', postid=t._id) }}">{{ t.title }}</a> by {{ t.by }}
+  			<br>
+  		{% else %}
+  			<li>No posts rightnow
+  		{% endfor %}
+  		</td>
+  		<td style="width: 35%;">
+  		<h2>Post a Post or don't!</h2>
+  		<br>
+    	<form action="{{ url_for('add_post') }}" method=post>
+      	<dl>
+        <dt>Title:
+        <dd><input type=text size=30 name=title>
+        <dt>Text:
+        <dd><textarea name=text rows=5 cols=40></textarea>
+        <dd><input type=submit value=Post>
+      </dl>
+    </form>
+  		</td>
+  	</ul>
+    {% endif %}
+
+{% endblock %}
